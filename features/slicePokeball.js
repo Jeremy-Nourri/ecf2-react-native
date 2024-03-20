@@ -22,7 +22,21 @@ export const capturePokemon = createAsyncThunk(
             pokeball = pokeball ? JSON.parse(pokeball) : [];
             pokeball.push(pokemon);
             await AsyncStorage.setItem('pokeball', JSON.stringify(pokeball));
-            console.log(pokeball);
+            return pokeball;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+);
+
+export const removePokemon = createAsyncThunk(
+    'pokeball/removePokemon',
+    async (pokemonId) => {
+        try {
+            let pokeball = await AsyncStorage.getItem('pokeball');
+            pokeball = pokeball ? JSON.parse(pokeball) : [];
+            pokeball = pokeball.filter(poke => poke.id !== pokemonId);
+            await AsyncStorage.setItem('pokeball', JSON.stringify(pokeball));
             return pokeball;
         } catch (error) {
             console.error(error);
@@ -63,6 +77,11 @@ export const slicePokeball = createSlice({
                 console.log(state.count);
             })
             .addCase(clearPokeball.fulfilled, (state, action) => {
+                state.pokeball = action.payload;
+                state.count = action.payload.length;
+                console.log(state.count);
+            })
+            .addCase(removePokemon.fulfilled, (state, action) => {
                 state.pokeball = action.payload;
                 state.count = action.payload.length;
                 console.log(state.count);
