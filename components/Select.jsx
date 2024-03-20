@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from 'react';
@@ -35,7 +35,7 @@ const Select = () => {
     };
 
     return (
-        <View>
+        <View style={styles.container}>
             <RNPickerSelect
                 placeholder={{label: 'Afficher un type :', value: ''}}
                 onValueChange={value => handleSelectByType(value)}
@@ -43,16 +43,34 @@ const Select = () => {
                     label: type.name,
                     value: type.name,
                 }))}
+                style={{inputAndroid: styles.input}}
             />
             <RNPickerSelect
                 placeholder={{label: 'Trier par :', value: ''}}
                 onValueChange={value => handleSortBy(value)}
                 items={[
-                    {label: 'Tri par type', value: 'type'},
-                    {label: "Tri par l'idPokedex", value: 'pokedexId'},
+                    {label: 'Trier par type', value: 'type'},
+                    {label: "Trier par l'idPokedex", value: 'pokedexId'},
                 ]}
+                style={{inputAndroid: styles.input}}
             />
         </View>
     );
 };
 export default Select;
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+    },
+    input: {
+        width: 190,
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 10,
+        marginVertical: 20,
+    },
+});
+

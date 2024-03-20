@@ -8,21 +8,17 @@ const Card = ({navigation, name, imageUrl, pokedexId}) => {
                 onPress={() => {
                     navigation.navigate('Details', {name: name});
                 }}>
-                <View style={styles.containerPicture}>
                     <Image
                         style={styles.picture}
                         source={{
                             uri: imageUrl,
                         }}
                     />
-                </View>
                 <View style={styles.containerTitle}>
                     <Text style={styles.textTitle}>{name}</Text>
-                    <View style={styles.containerDetails}>
-                        <Text style={styles.textDetails}>
-                            Id Pokedex: {pokedexId}
-                        </Text>
-                    </View>
+                    <Text style={styles.textDetails}>
+                        Id Pokedex: {pokedexId}
+                    </Text>
                 </View>
             </Pressable>
         </View>
@@ -44,17 +40,13 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'lightgrey',
         width: '90%',
-        height: 100,
+        height: 120,
         borderRadius: 10,
-    },
-    containerPicture: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        elevation: 5,
     },
     picture: {
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
     },
     containerTitle: {
         flex: 3,
@@ -63,6 +55,8 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black',
     },
     containerDetails: {
         flex: 1,

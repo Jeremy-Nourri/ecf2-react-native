@@ -3,11 +3,7 @@ import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
-import {fetchPokemons} from '../features/slicePokemons';
-import {
-    searchByNameAndByPokedexId,
-    sortByType,
-} from '../features/slicePokemons';
+import {fetchPokemons, searchByNameAndByPokedexId} from '../features/slicePokemons';
 
 import Card from '../components/Card';
 import Select from '../components/Select';
@@ -61,13 +57,17 @@ export default Home;
 const styles = StyleSheet.create({
     input: {
         width: '90%',
-        height: 40,
+        height: 50,
         margin: 12,
-        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+        textAlign: 'center',
         marginHorizontal: 20,
+        backgroundColor: 'white',
     },
     flatList: {
         width: '100%',
         height: '100%',
+        marginTop: 30,
     },
 });

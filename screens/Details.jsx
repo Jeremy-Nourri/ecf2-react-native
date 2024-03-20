@@ -1,12 +1,14 @@
 import { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
-import {useSelector} from 'react-redux';
+import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import { capturePokemon } from '../features/slicePokeball';
+
 
 const Details = ({ route, navigation }) => {
 
-    const {name} = route.params;
-
+    const dispatch = useDispatch();
     const pokemons = useSelector(state => state.pokemons.pokemons);
+    const {name} = route.params;
 
     const pokemonDetails = pokemons.filter(pokemon => pokemon.name === name);
 
@@ -58,6 +60,16 @@ const Details = ({ route, navigation }) => {
                 </View>
             )}
         />
+        <Pressable
+            style={styles.button}
+            onPress={() => {
+                dispatch(capturePokemon(pokemonDetails[0]));
+            }}
+        >
+            <Text>Capturer</Text>
+        </Pressable>
+
+
 
     </View>
   );
@@ -86,6 +98,14 @@ const styles = StyleSheet.create({
     },
     typeContainer: {
         flexDirection: 'row',
+    },
+    button: {
+        margin: 10,
+        padding: 10,
+        backgroundColor: 'lightgrey',
+        width: '90%',
+        borderRadius: 10,
+        alignItems: 'center',
     },
 });
 
