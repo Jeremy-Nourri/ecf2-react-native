@@ -82,6 +82,7 @@ const Home = () => {
                         />
                     </View>
                     <Select />
+
                 </>
             )}
         </View>
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
     },
 
     cardsContainer: {
+        flex: 1,
         backgroundColor: '#316ab2',
     },
 });

@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Pressable, Text} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from 'react';
@@ -37,7 +37,7 @@ const Select = () => {
     return (
         <View style={styles.container}>
             <RNPickerSelect
-                placeholder={{label: 'Afficher un type :', value: ''}}
+                placeholder={{label: 'Afficher type :', value: ''}}
                 onValueChange={value => handleSelectByType(value)}
                 items={types.map((type) => ({
                     label: type.name,
@@ -54,6 +54,11 @@ const Select = () => {
                 ]}
                 style={{inputAndroid: styles.input}}
             />
+            <Pressable
+                onPress={() => dispatch(fetchPokemons())}
+                style={styles.button}>
+                <Text style={styles.textButton}>Reset</Text>
+            </Pressable>
         </View>
     );
 };
@@ -63,14 +68,26 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+        backgroundColor: 'white',
     },
     input: {
         width: 190,
-        height: 50,
+        height: 46,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding: 10,
-        marginVertical: 20,
+        marginVertical: 8,
+    },
+    button: {
+        backgroundColor: '#316ab2',
+        borderRadius: 20,
+        marginVertical: 8,
+        marginHorizontal: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        justifyContent: 'center',
+    },
+    textButton: {
+        color: 'white',
     },
 });
 
