@@ -1,79 +1,92 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Pokedex Mobile Application
 
-# Getting Started
+## Presentation
+This is a project carried out during my developer training.  
+The goal was to create a mobile application of Pokedex.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Stacks used
+- Javascript
+- React Native
+- Redux
+- React Navigation
+- Redux ToolKit
+- React Native Picker
+- React Native Vector Icons
 
-## Step 1: Start the Metro Server
+## API
+The data comes from the great API of
+[PokeBuild](https://pokebuildapi.fr/api/v1)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Features
+- Display loader during the loading of the data
+- List of all pokemons
+- Search for a pokemon by name and by pokedex id
+- Filter by type and by pokedex id
+- Display pokemon by type
+- Display of the details of a pokemon
+- Display of the evolution chain of a pokemon
+- Display of the types of a pokemon
+- Display of the stats of a pokemon
+- Capture a pokemon, add it to a collection
+- Display modal during capture
+- Remove a pokemon from a collection
+- Release a pokemon, remove it from the collection
+- Clear the collection of pokemons
+- Display of the collection of pokemons
+- Display how many pokemons are in the collection
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Getting Started
+1. Clone the repository
+2. Install Android Studio
+3. Create an Android Virtual Device
+4. You need to have [Node.js](https://nodejs.org/en/) installed on your machine 
 
+5. Install the dependencies
 ```bash
-# using npm
+npm install
+```
+6. Start the project
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Start your Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Screenshots
 
-### For Android
+Loader  
+<img src="./screenshots/Loading.png" style="width:150px"/>
 
-```bash
-# using npm
-npm run android
+Home page  
+<img src="./screenshots/Home-PokemonList.png" style="width:150px"/>
 
-# OR using Yarn
-yarn android
-```
+Display search bar  
+<img src="./screenshots/Display-Search-Bar.png" style="width:150px"/>
 
-### For iOS
+Search by name  
+<img src="./screenshots/Search.png"  style="width:150px"/>
 
-```bash
-# using npm
-npm run ios
+Display select input to filter by type  
+<img src="./screenshots/Display-Select-Type.png" style="width:150px"/>
 
-# OR using Yarn
-yarn ios
-```
+Display Select input to sort  
+<img src="./screenshots/Display-Select-Sort.png" style="width:150px"/>
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Details of a pokemon  
+<img src="./screenshots/Details-Pokemon.png" style="width:150px"/>
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+Modal to capture a pokemon  
+<img src="./screenshots/Modal-Capture-Pokemon.png" style="width:150px"/>
 
-## Step 3: Modifying your App
+Collection of pokemons  
+<img src="./screenshots/Collection.png" style="width:150px"/>
 
-Now that you have successfully run the app, let's modify it.
+Empty collection  
+<img src="./screenshots/Collection-empty.png" style="width:150px"/>
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Mockup
+You can find the mockup of the application in the directory `maquette`
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Credits
+- [PokeBuild](https://pokebuildapi.fr/api/v1)
+- Pikachu gif by [BenKuhlmann](https://lottiefiles.com/gh1hzif5dgptoco2)
+- Others pictures by [The Pokémon Company International on Tumblr](https://pokemon.tumblr.com/)
