@@ -1,15 +1,34 @@
-import {useLayoutEffect} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
 import {StyleSheet, Text, View, FlatList, Image, Pressable} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {capturePokemon} from '../features/slicePokeball';
-import pokeball from '../assets/images/pokeball.png';
+import {capturePokemon, removePokemon} from '../features/slicePokeball';
+import pokeballIcon from '../assets/images/pokeball.png';
+import ModalCapture from '../components/ModalCapture';
 
 const Details = ({route, navigation}) => {
     const dispatch = useDispatch();
     const pokemons = useSelector(state => state.pokemons.pokemons);
     const {name} = route.params;
 
+    const [isCapturing, setIsCapturing] = useState(false);
+
     const pokemonDetails = pokemons.filter(pokemon => pokemon.name === name);
+
+    const pokeball = useSelector(state => state.pokeball.pokeball);
+
+    const isInPokeball = pokeball.some(pokemon => pokemon.name === name);
+
+    const handleCapture = () => {
+        setIsCapturing(true);
+        dispatch(capturePokemon(pokemonDetails[0]));
+        setTimeout(() => {
+            setIsCapturing(false);
+        }, 2000);
+    };
+
+    const handleRelease = () => {
+        dispatch(removePokemon(pokemonDetails[0].id));
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -17,7 +36,9 @@ const Details = ({route, navigation}) => {
         });
     }, [navigation, name]);
 
-    return (
+    return isCapturing ? (
+        <ModalCapture modalIsVisible={isCapturing} pokemonName={name} />
+    ) : (
         <View style={styles.container}>
             <FlatList
                 data={pokemonDetails}
@@ -56,7 +77,7 @@ const Details = ({route, navigation}) => {
                         </View>
 
                         <Text style={styles.sectionTitle}>Statistiques</Text>
-                        <View>
+                        <View style={styles.sectionText}>
                             <Text style={styles.text}>
                                 HP : {item.stats.HP}
                             </Text>
@@ -78,7 +99,7 @@ const Details = ({route, navigation}) => {
                         </View>
 
                         <Text style={styles.sectionTitle}>Évolutions</Text>
-                        <View>
+                        <View style={styles.sectionText}>
                             <Text style={styles.text}>
                                 {item.apiEvolutions.length === 0
                                     ? 'Aucune évolution'
@@ -94,32 +115,41 @@ const Details = ({route, navigation}) => {
                         </View>
 
                         <Text style={styles.sectionTitle}>Pré évolution</Text>
-                        <View>
-                            <Text style={styles.text}>
+                        <View style={styles.sectionText}>
                                 {item.apiPreEvolution === 'none' ? (
                                     'Aucune pré évolution'
                                 ) : (
-                                    <Text>
+                                    <Text style={styles.text}>
                                         {item.apiPreEvolution.name} / Pokedex id{' '}
-                                        {item.apiPreEvolution.pokedexId}
+                                        {item.apiPreEvolution.pokedexIdd}
                                     </Text>
                                 )}
-                            </Text>
                         </View>
                     </View>
                 )}
             />
-            <Pressable
-                style={styles.button}
-                onPress={() => {
-                    dispatch(capturePokemon(pokemonDetails[0]));
-                }}>
-                <Text style={styles.textButton}>Capturer</Text>
-                <Image style={styles.pokeball} source={pokeball} />
-            </Pressable>
+            {!isInPokeball ? (
+                <Pressable
+                    style={styles.button}
+                    onPress={handleCapture}
+                    disabled={isInPokeball}>
+                    <Text style={styles.textButton}>Capturer</Text>
+                    <Image style={styles.pokeballIcon} source={pokeballIcon} />
+                </Pressable>
+            ) : (
+                <Pressable
+                    style={styles.button}
+                    onPress={handleRelease}
+                    disabled={!isInPokeball}>
+                    <Text style={styles.textButton}>Relâcher</Text>
+                    <Image style={styles.pokeballIcon} source={pokeballIcon} />
+
+                </Pressable>
+            )}
         </View>
     );
 };
+
 export default Details;
 const styles = StyleSheet.create({
     container: {
@@ -163,14 +193,13 @@ const styles = StyleSheet.create({
         width: 100,
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: 20,
     },
     typePicture: {
         width: 100,
         height: 100,
     },
-
     sectionTitle: {
-        marginTop: 20,
         marginBottom: 10,
         fontSize: 20,
         fontWeight: 'bold',
@@ -179,6 +208,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgrey',
         paddingVertical: 15,
         color: 'black',
+    },
+    sectionText: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
     },
     text: {
         fontSize: 16,
@@ -202,7 +237,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginRight: 10,
     },
-    pokeball: {
+    pokeballIcon: {
         width: 30,
         height: 30,
     },

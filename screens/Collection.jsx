@@ -1,12 +1,12 @@
-import {Pressable, StyleSheet, Text, View, FlatList} from 'react-native';
+import {Pressable, StyleSheet, Text, View, FlatList, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {clearPokeball, fetchPokeball, removePokemon} from '../features/slicePokeball';
+import image from '../assets/images/nocollection.png';
 import Card from '../components/Card';
-
 
 const Collection = () => {
     const navigation = useNavigation();
@@ -25,7 +25,10 @@ const Collection = () => {
     return (
         <View style={styles.container}>
             {pokeball.length === 0 ? (
-                <Text>Vous n'avez pas de pokémon dans votre collection</Text>
+                <View style={styles.noCollectionContainer} >
+                    <Image source={image} style={styles.noCollectionImage} />
+                    <Text style={styles.noCollectionText}>Vous n'avez pas de pokémon dans votre collection</Text>
+                </View>
             ) : (
                 <>
                     <View style={styles.cardsContainer}>
@@ -74,6 +77,21 @@ export default Collection;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    noCollectionContainer: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#316ab2',
+    },
+    noCollectionImage: {
+        width: '100%',
+    },
+    noCollectionText : {
+        marginTop: 20,
+        fontSize: 17,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'white',
     },
     cardsContainer: {
         flex: 1,
